@@ -2,9 +2,9 @@ using System;
 
 namespace design_patterns
 {
-    public class ISS
+    public class ISS : IImposto
     {
-        public double CalculaISS(Orcamento orcamento)
+        public double Calcula(Orcamento orcamento)
         {
             return orcamento.Valor * 0.06;
         }
