@@ -12,10 +12,12 @@ namespace builder
         public double Impostos;
         public List<ItemDaNota> Itens;
         public string Observacoes;
+        public List<AcaoAposGerarNota> AcoesAposGerarNota;
 
         public NotaFiscalBuilder()
         {
             Itens = new List<ItemDaNota>();
+            AcoesAposGerarNota = new List<AcaoAposGerarNota>();
         }
 
         public NotaFiscalBuilder ParaRazaoSocial(string razaoSocial)
@@ -50,9 +52,22 @@ namespace builder
             return this;
         }
 
+        public NotaFiscalBuilder ParaAcoesAposGerarNota(AcaoAposGerarNota acao)
+        {
+            this.AcoesAposGerarNota.Add(acao);
+            return this;
+        }
+
         public NotaFiscal Constroi()
         {
-            return new NotaFiscal(RazaoSocial, Cnpj, DataEmissao, ValorTotal, Impostos, Itens, Observacoes);
+            var notaFiscal = new NotaFiscal(RazaoSocial, Cnpj, DataEmissao, ValorTotal, Impostos, Itens, Observacoes);
+
+            foreach (AcaoAposGerarNota acao in AcoesAposGerarNota)
+            {
+                acao.Executa(notaFiscal);
+            }
+
+            return notaFiscal;
         }
 
     }

@@ -14,6 +14,8 @@ namespace builder
                             .ParaItem(new ItemDaNota("item 1", 100.0))
                             .ParaItem(new ItemDaNota("item 2", 200.0))
                             .ParaObservacoes("observacao")
+                            .ParaAcoesAposGerarNota(new EnviarEmail())
+                            .ParaAcoesAposGerarNota(new ImprimirNotaFiscal())
                             .Constroi();
 
             Console.WriteLine(notaFiscal);
