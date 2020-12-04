@@ -1,4 +1,5 @@
 ﻿using System;
+using visitor.Math;
 
 namespace visitor
 {
@@ -6,7 +7,11 @@ namespace visitor
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Sum sum = new Sum(new Number(1), new Number(2));
+            Subtraction subtraction = new Subtraction(new Number(1), new Number(2));
+
+            Console.WriteLine(sum.Evaluate());
+            Console.WriteLine(subtraction.Evaluate());
         }
     }
 }
