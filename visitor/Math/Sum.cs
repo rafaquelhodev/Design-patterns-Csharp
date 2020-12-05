@@ -4,6 +4,7 @@ namespace visitor.Math
     {
         public IExpression Left { get; set; }
         public IExpression Right { get; set; }
+        public IPrinterVisitor Printer { get; set; }
 
         public Sum(IExpression left, IExpression right)
         {
@@ -17,6 +18,16 @@ namespace visitor.Math
             var rightResult = Right.Evaluate();
 
             return leftResult + rightResult;
+        }
+
+        public void Accepts(IPrinterVisitor printer)
+        {
+            Printer = printer;
+        }
+
+        public string Print()
+        {
+            return Printer.PrintSum(this);
         }
     }
 }

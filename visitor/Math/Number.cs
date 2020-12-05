@@ -2,16 +2,27 @@ namespace visitor.Math
 {
     public class Number : IExpression
     {
-        public int _Number { get; set; }
+        public int Value { get; set; }
+        public IPrinterVisitor Printer { get; set; }
 
-        public Number(int _number)
+        public Number(int _value)
         {
-            _Number = _number;
+            Value = _value;
         }
 
         public int Evaluate()
         {
-            return _Number;
+            return Value;
+        }
+
+        public void Accepts(IPrinterVisitor printer)
+        {
+            Printer = printer;
+        }
+
+        public string Print()
+        {
+            return Printer.PrintNumber(this);
         }
     }
 
